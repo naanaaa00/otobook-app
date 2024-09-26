@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:Otobook/screens/start.dart';
-
-void main() {
-  runApp(App());
-}
-
-class App extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
-    );
-  }
-}
+import 'package:Viva/screens/start.dart';
+import 'package:Viva/widgets/absensi.dart'; // Pastikan ini benar
+import 'package:Viva/widgets/button_card.dart';
+import '../../../core/core.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
-  
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -56,34 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 178, 166, 182), // Background color for the left side
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20.0), // Rounded corner at the bottom-right
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Hi!, Damar',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 1.0), // Space between texts
-                          
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
                   MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
@@ -93,169 +53,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(builder: (context) => StartScreen()),
                         );
                       },
-                      child: Padding(
+                      child: Container(
                         padding: const EdgeInsets.all(16.0),
-                        child: Image.asset(
-                          'assets/logo_oto.PNG', // Path to the PNG image in assets
-                          height: 50,
+                        child: const Text(
+                          'Logo Here', // Ganti dengan logo Anda
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
                   ),
+                  // Tambahkan ikon atau widget lain di sini jika perlu
                 ],
               ),
             ),
-            // Space between greeting and carousel
-            SizedBox(height: 20.0), // Adjust the height as needed
-
-            // Carousel section
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.18, // Adjusted height for the carousel
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: _onPageChanged,
-                children: [
-                  _buildPage(
-                    color: Colors.blue,
-                    iconPath: 'assets/icon/ocr-icon.svg',
-                    text1: 'OCR Technology',
-                    text2: 'Untuk Scan Meta Data Bibliografis/Buku',
-                  ),
-                  _buildPage(
-                    color: Colors.orange,
-                    iconPath: 'assets/icon/ai-icon.svg',
-                    text1: 'AI Technology',
-                    text2: 'Untuk Mengklasifikasikan Keywords dari Sinopsis yang di Scan OR',
-                  ),
-                  _buildPage(
-                    color: const Color.fromARGB(255, 111, 0, 255),
-                    iconPath: 'assets/icon/ai-icon.svg',
-                    text1: 'RPA Technology',
-                    text2: 'Robotic Process Automation yang Terintegrasi dengan Perpustakaan',
-                  ),
-                ],
-              ),
-            ),
-            _buildPageIndicator(),
-            SizedBox(height: 20.0), // Space between carousel and images
-
-            // Images with text inside
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  _buildImageWithText(
-                    'assets/m.png', // Path to the PNG image
-                    ''// Text inside the first image
-                  ),
-                  SizedBox(height: 20.0), // Space between the images
-                  _buildImageWithText(
-                    'assets/p.png',
-                    ''// Path to the PNG image
-                  ),
-                
-                ],
-              ),
-            ),
+            const SizedBox(height: 30.0),
+            IconRowWidget(),
+            const SizedBox(height: 30.0),
+            AttendanceWidget(), // Memanggil AttendanceWidget di bawah IconRowWidget
+            const SizedBox(height: 20),
+            _buildImageWithText('assets/example_image.png', 'Contoh Gambar'), // Ganti dengan path yang sesuai
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPage({
-    required Color color,
-    required String iconPath,
-    required String text1,
-    required String text2,
-  }) {
-    return Center(
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.8, // Adjust width as needed
-        height: MediaQuery.of(context).size.height * 0.3, // Adjust height as needed
-        decoration: BoxDecoration(
-          color: color, // Inner rectangle color
-          borderRadius: BorderRadius.circular(20.0), // Rounded corners
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    iconPath, // Path to the SVG icon
-                    width: 40, // Adjust width as needed
-                    height: 40, // Adjust height as needed
-                    placeholderBuilder: (context) => SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-                  SizedBox(width: 16.0), // Space between icon and text
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          text1, // The bold text to display
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18, // Adjust font size as needed
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 4.0), // Space between texts
-                        Text(
-                          text2, // The non-bold text to display
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16, // Adjust font size as needed
-                          ),
-                          overflow: TextOverflow.visible, // Ensure text can wrap and be visible
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPageIndicator() {
+  Widget _buildImageWithText(String imagePath, String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(3, (index) {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 4.0),
-            width: _currentPage == index ? 12.0 : 8.0,
-            height: _currentPage == index ? 12.0 : 8.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: _currentPage == index ? Colors.white : Colors.grey[400],
-            ),
-          );
-        }),
-      ),
-    );
-  }
-
-  Widget _buildImageWithText(
-    String imagePath, 
-    String text
-  ) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 20.0), // Space between images
-      width: MediaQuery.of(context).size.width * 0.8, // Reduced width of the image
+      margin: const EdgeInsets.only(bottom: 20.0), // Space between images
+      width: MediaQuery.of(context).size.width * 0.9, // Reduced width of the image
       height: 120, // Adjust height to make image smaller
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.0), // Rounded corners

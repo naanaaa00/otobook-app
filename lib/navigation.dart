@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:Otobook/screens/about.dart';
-import 'package:Otobook/screens/katalog.dart';
-import 'package:Otobook/screens/team.dart';
+import 'package:Viva/screens/search.dart';
+import 'package:Viva/screens/history.dart';
+import 'package:Viva/screens/setting.dart';
 import 'screens/home.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -16,10 +16,10 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
   List<Widget> _widgetOptions = <Widget>[
     HomeScreen(), // Halaman HomeScreen dari file terpisah
-    KatalogScreen(), // Halaman lain
-    AboutScreen(),
-    AboutScreen(), // Halaman lain
-    TeamScreen(), // Halaman lain
+    HistoryAbsensiScreen(), // Halaman lain
+    SearchScreen(),
+    SearchScreen(), // Halaman lain
+    SettingScreen(), // Halaman lain
   ];
 
   void _onItemTapped(int index) {
@@ -45,8 +45,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: 'List',
+            icon: Icon(Icons.assignment_add),
+            label: 'History',
           ),
             BottomNavigationBarItem(
             icon: SizedBox.shrink(), 
@@ -58,12 +58,12 @@ class _NavigationMenuState extends State<NavigationMenu> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Saya',
+            icon: Icon(Icons.settings),
+            label: 'Setting',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF005CBE),
+        selectedItemColor: Color.fromARGB(255, 241, 73, 73),
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed, // Menampilkan semua ikon terus-menerus
       ),
@@ -75,7 +75,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
         child: Stack(
           children: [
         Icon(
-          Icons.center_focus_weak_sharp,
+          Icons.person_add,
           color: Colors.white,
           size: 30.0, // Set the icon size (default is 24.0)
         ),

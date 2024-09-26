@@ -1,3 +1,27 @@
+
+ext.kotlin_version = '1.9.0' // Versi terbaru
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        ext.kotlin_version = '1.9.0' // Versi terbaru
+
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
+
 allprojects {
     repositories {
         google()

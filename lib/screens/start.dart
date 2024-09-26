@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:Otobook/screens/signin.dart';
+
+import 'package:Viva/screens/signin.dart';
 
 
 
@@ -16,26 +16,22 @@ class StartScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/pic1.svg', // Path to the SVG image in assets
+              Image.asset(
+                'assets/start.png',
+                width: MediaQuery.of(context).size.width,
                 height: 180,
               ),
               const SizedBox(height: 20),
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'assets/logo_oto.PNG', // Path to the PNG image in assets
-                        height: 38,
-                      ),
-                      const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          'adalah aplikasi Pembaca otomatis metadata buku untuk koleksi buku di Perpustakaan',
-                          textAlign: TextAlign.left,
+                          'Viva Attendance adalah Aplikasi Absensi Online untuk Sales Counter Viva Cosmetics',
+                          textAlign: TextAlign.justify,
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
@@ -50,26 +46,26 @@ class StartScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignIn()),
-                    );
-                    },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromRGBO(0, 179, 255, 1), // Warna latar belakang biru muda (#00B3FF)
-                    ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0), // Tidak ada pembulatan, sudut lancip
+                      MaterialPageRoute(
+                        builder: (context) =>  SignIn(),
                       ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFD61013), // Warna background tombol
+                    minimumSize: const Size(double.infinity, 50), // Lebar penuh
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30), // Sudut membulat
                     ),
+                    elevation: 5, // Memberikan bayangan/efek 3D
+                    shadowColor: Colors.black.withOpacity(0.3), // Warna bayangan
                   ),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Get Started',
-                      style: TextStyle(color: Colors.white), // Warna teks putih
+                  child: const Text(
+                    'Masuk',
+                    style: TextStyle(
+                      color: Colors.white, // Warna teks putih
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
                 ),

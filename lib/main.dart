@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Otobook/screens/start.dart';
+import 'package:Viva/screens/start.dart';
 
 
 

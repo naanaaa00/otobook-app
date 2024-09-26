@@ -49,3 +49,8 @@
 		<false/>
 	</dict>
 </plist>
+
+<key>NSCameraUsageDescription</key>
+<string>We need to access your camera for face detection.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need to access your location for GPS attendance.</string>

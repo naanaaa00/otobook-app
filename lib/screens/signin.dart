@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:Otobook/screens/signup.dart'; // Ensure this import is correct
-import 'package:Otobook/navigation.dart'; // Ensure this import is correct
+// Ensure this import is correct
+import 'package:Viva/navigation.dart'; // Ensure this import is correct
+import 'package:Viva/screens/forgot_password.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _SignInState extends State<SignIn> {
         title: Text(
           'Sign In',
           style: TextStyle(
-            color: Color(0xFF3C83F5),
+            color: Color(0xFFF53C8F),
             fontSize: 20,
             fontWeight: FontWeight.bold,
             letterSpacing: 0.10,
@@ -45,7 +46,7 @@ class _SignInState extends State<SignIn> {
               child: Opacity(
                 opacity: 0.50,
                 child: Text(
-                  'Sign up now and enjoy OTOBOOK privileges never existed before.',
+                  'Sign up now Viva Cosmetics Attendance',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF111827),
@@ -137,12 +138,17 @@ class _SignInState extends State<SignIn> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // Navigate to forget password page
-                      },
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ForgotPasswordPage(),
+                    ),
+                  );
+                },
                       child: Text(
                         'Forget Password?',
                         style: TextStyle(
-                          color: Color(0xFF3C83F5),
+                          color: Color(0xFFF53C8F),
                           fontSize: 12,
                           fontFamily: 'Montserrat',
                           letterSpacing: 0.07,
@@ -163,43 +169,13 @@ class _SignInState extends State<SignIn> {
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF3C83F5), // Button color
+                      backgroundColor: Color(0xFFD71014), // Button color
                       minimumSize: Size(double.infinity, 50), // Button size
                     ),
                   ),
                
                   SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account? ',
-                        style: TextStyle(
-                          color: Color(0xFF111827),
-                          fontSize: 12,
-                          fontFamily: 'Montserrat',
-                          letterSpacing: 0.07,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()), // Navigate to SignUp
-                          );
-                        },
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Color(0xFF3C83F5),
-                            fontSize: 12,
-                            fontFamily: 'Montserrat',
-                            letterSpacing: 0.07,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                
                 ],
               ),
             ),
