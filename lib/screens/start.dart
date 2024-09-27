@@ -1,6 +1,6 @@
+import 'package:Viva/services/auth_gate.dart';
 import 'package:flutter/material.dart';
 
-import 'package:Viva/screens/signin.dart';
 
 
 
@@ -29,11 +29,11 @@ class StartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: Text(
-                          'Viva Attendance adalah Aplikasi Absensi Online untuk Sales Counter Viva Cosmetics',
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: 16),
-                        ),
+                      child: Text(
+                        'Viva Attendance adalah Aplikasi Absensi Online untuk Sales Counter Viva Cosmetics',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
                       ),
                     ],
                   ),
@@ -47,7 +47,7 @@ class StartScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  SignIn(),
+                        builder: (context) =>  AuthGate(),
                       ),
                     );
                   },

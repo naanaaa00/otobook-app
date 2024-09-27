@@ -1,0 +1,789 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FIyansa",
+    "description": "",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://103.106.72.182:8771/api",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "GetUser",
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.",
+        "operationId": "GetUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "addUser",
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+        "operationId": "addUser",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/addUserRequest"
+                  },
+                  {
+                    "example": {
+                      "username": "daffa",
+                      "email": "daffa@gmail.com",
+                      "password": "daffa123",
+                      "role": "superadmin"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "username": "daffa",
+                "email": "daffa@gmail.com",
+                "password": "daffa123",
+                "role": "superadmin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "login",
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+        "operationId": "login",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/loginrequest"
+                  },
+                  {
+                    "example": {
+                      "email": "daffa@gmail.com",
+                      "password": "daffa123"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "daffa@gmail.com",
+                "password": "daffa123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/user/1": {
+      "put": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "UpdateUser",
+        "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.",
+        "operationId": "UpdateUser",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "file",
+                  "alamat",
+                  "nik",
+                  "telfon"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "alamat": {
+                    "type": "string",
+                    "example": "jombang"
+                  },
+                  "nik": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 3121564651252
+                  },
+                  "telfon": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 121224215454
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "Deleteuser",
+        "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code.",
+        "operationId": "Deleteuser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "logout",
+        "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code.",
+        "operationId": "logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/absensiIn/1": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "absensi IN",
+        "operationId": "absensiIN",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "latitude",
+                  "longitude",
+                  "foto"
+                ],
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "format": "double",
+                    "example": -7.27781
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 112.795517
+                  },
+                  "foto": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/absensiOut/1": {
+      "put": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "absensiOUT",
+        "operationId": "absensiOUT",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "latitude",
+                  "longitude",
+                  "foto"
+                ],
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "format": "double",
+                    "example": -7.27781
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 112.795517
+                  },
+                  "foto": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/absensi/2": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "absen",
+        "operationId": "absen",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/jadwal": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "AddJadwal",
+        "operationId": "AddJadwal",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/AddJadwalRequest"
+                  },
+                  {
+                    "example": {
+                      "id_user": 1,
+                      "sesi": "Sesi Pagi",
+                      "tanggal": "2024-09-27",
+                      "jam_masuk": "08:00:00",
+                      "jam_keluar": "16:00:00",
+                      "latitude": -7.27781,
+                      "longitude": 112.795517,
+                      "alamat": "Politeknik Elektronika Negeri Surabaya",
+                      "kota": "Surabaya"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "id_user": 1,
+                "sesi": "Sesi Pagi",
+                "tanggal": "2024-09-27",
+                "jam_masuk": "08:00:00",
+                "jam_keluar": "16:00:00",
+                "latitude": -7.27781,
+                "longitude": 112.795517,
+                "alamat": "Politeknik Elektronika Negeri Surabaya",
+                "kota": "Surabaya"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "getJadwal",
+        "operationId": "getJadwal",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/jadwal/1": {
+      "put": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "update jadwal",
+        "operationId": "updatejadwal",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/updatejadwalrequest"
+                  },
+                  {
+                    "example": {
+                      "id_user": 1,
+                      "sesi": "Sesi Pagi",
+                      "tanggal": "2024-09-27",
+                      "jam_masuk": "08:00:00",
+                      "jam_keluar": "16:00:00",
+                      "latitude": -7.27781,
+                      "longitude": 112.795517,
+                      "alamat": "Politeknik Elektronika Negeri Surabaya",
+                      "kota": "Surabaya Jawa Timur"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "id_user": 1,
+                "sesi": "Sesi Pagi",
+                "tanggal": "2024-09-27",
+                "jam_masuk": "08:00:00",
+                "jam_keluar": "16:00:00",
+                "latitude": -7.27781,
+                "longitude": 112.795517,
+                "alamat": "Politeknik Elektronika Negeri Surabaya",
+                "kota": "Surabaya Jawa Timur"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/jadwalSearch": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "search jadwal",
+        "operationId": "searchjadwal",
+        "parameters": [
+          {
+            "name": "kota",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "surabaya"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/laporan": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "addLaporan",
+        "operationId": "addLaporan",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/addLaporanRequest"
+                  },
+                  {
+                    "example": {
+                      "id_user": 1,
+                      "counter": "counter_value"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "id_user": 1,
+                "counter": "counter_value"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "getLaporanall",
+        "operationId": "getLaporanall",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/laporan/3": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "getLaporan",
+        "operationId": "getLaporan",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/laporan/4": {
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "hapusLaporan",
+        "operationId": "hapusLaporan",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "addUserRequest": {
+        "title": "addUserRequest",
+        "required": [
+          "username",
+          "email",
+          "password",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "username": "daffa",
+          "email": "daffa@gmail.com",
+          "password": "daffa123",
+          "role": "superadmin"
+        }
+      },
+      "loginrequest": {
+        "title": "loginrequest",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "daffa@gmail.com",
+          "password": "daffa123"
+        }
+      },
+      "AddJadwalRequest": {
+        "title": "AddJadwalRequest",
+        "required": [
+          "id_user",
+          "sesi",
+          "tanggal",
+          "jam_masuk",
+          "jam_keluar",
+          "latitude",
+          "longitude",
+          "alamat",
+          "kota"
+        ],
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sesi": {
+            "type": "string"
+          },
+          "tanggal": {
+            "type": "string"
+          },
+          "jam_masuk": {
+            "type": "string"
+          },
+          "jam_keluar": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "alamat": {
+            "type": "string"
+          },
+          "kota": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id_user": 1,
+          "sesi": "Sesi Pagi",
+          "tanggal": "2024-09-27",
+          "jam_masuk": "08:00:00",
+          "jam_keluar": "16:00:00",
+          "latitude": -7.27781,
+          "longitude": 112.795517,
+          "alamat": "Politeknik Elektronika Negeri Surabaya",
+          "kota": "Surabaya"
+        }
+      },
+      "updatejadwalrequest": {
+        "title": "updatejadwalrequest",
+        "required": [
+          "id_user",
+          "sesi",
+          "tanggal",
+          "jam_masuk",
+          "jam_keluar",
+          "latitude",
+          "longitude",
+          "alamat",
+          "kota"
+        ],
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sesi": {
+            "type": "string"
+          },
+          "tanggal": {
+            "type": "string"
+          },
+          "jam_masuk": {
+            "type": "string"
+          },
+          "jam_keluar": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "alamat": {
+            "type": "string"
+          },
+          "kota": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id_user": 1,
+          "sesi": "Sesi Pagi",
+          "tanggal": "2024-09-27",
+          "jam_masuk": "08:00:00",
+          "jam_keluar": "16:00:00",
+          "latitude": -7.27781,
+          "longitude": 112.795517,
+          "alamat": "Politeknik Elektronika Negeri Surabaya",
+          "kota": "Surabaya Jawa Timur"
+        }
+      },
+      "addLaporanRequest": {
+        "title": "addLaporanRequest",
+        "required": [
+          "id_user",
+          "counter"
+        ],
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "counter": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id_user": 1,
+          "counter": "counter_value"
+        }
+      },
+      "hapusLaporanRequest": {
+        "title": "hapusLaporanRequest",
+        "required": [
+          "id_user",
+          "counter"
+        ],
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "counter": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id_user": 1,
+          "counter": "percobaan"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}

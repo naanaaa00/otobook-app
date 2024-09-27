@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/core.dart';
 import 'notification_page.dart';
 import 'package:Viva/screens/faceid_registrasi.dart';
-
+import 'package:Viva/screens/profile.dart';
 
 
 class SettingScreen extends StatelessWidget {
@@ -13,6 +13,7 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Setting'),
+         automaticallyImplyLeading: false,
       ),
       body: ListView(
         padding: const EdgeInsets.all(18.0),
@@ -25,7 +26,12 @@ class SettingScreen extends StatelessWidget {
           ),
           const SpaceHeight(4.0),
           ListTile(
-            onTap: () {},
+            onTap: () {
+               Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
             title: const Text('Edit Profile'),
             trailing: const Icon(Icons.chevron_right),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:Viva/screens/search.dart';
 import 'package:Viva/screens/history.dart';
 import 'package:Viva/screens/setting.dart';
-import 'screens/home.dart';
+import 'screens/home_hr.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
@@ -15,7 +15,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(), // Halaman HomeScreen dari file terpisah
+    HomePage(), // Halaman HomeScreen dari file terpisah
     HistoryAbsensiScreen(), // Halaman lain
     SearchScreen(),
     SearchScreen(), // Halaman lain

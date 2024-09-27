@@ -1,18 +1,17 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/core.dart';
 import 'package:Viva/screens/attendance_succes_page.dart';
-import 'location_page.dart';
+import 'package:Viva/screens/location_page.dart';
 
-class AttendancePage extends StatefulWidget {
-  const AttendancePage({super.key});
+class AbsensiPulangPage extends StatefulWidget {
+  const AbsensiPulangPage({super.key});
 
   @override
-  State<AttendancePage> createState() => _AttendancePageState();
+  State<AbsensiPulangPage> createState() => _AbsensiPulangPageState();
 }
 
-class _AttendancePageState extends State<AttendancePage> {
+class _AbsensiPulangPageState extends State<AbsensiPulangPage> {
   List<CameraDescription>? _availableCameras;
   CameraController? _controller;
 
@@ -24,7 +23,7 @@ class _AttendancePageState extends State<AttendancePage> {
 
   @override
   void dispose() {
-    _controller!.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -36,15 +35,14 @@ class _AttendancePageState extends State<AttendancePage> {
   void _initCamera(CameraDescription description) async {
     _controller = CameraController(description, ResolutionPreset.max);
     await _controller!.initialize();
-    if (!mounted) {
-      return;
-    }
+    if (!mounted) return;
     setState(() {});
   }
 
   void _takePicture() async {
-    await _controller!.takePicture();
+    final image = await _controller!.takePicture();
     if (mounted) {
+      // Kirim gambar ke backend untuk verifikasi dan absensi pulang
       context.pushReplacement(const AttendanceSuccessPage());
     }
   }
@@ -53,11 +51,13 @@ class _AttendancePageState extends State<AttendancePage> {
     final lensDirection = _controller!.description.lensDirection;
     CameraDescription newDescription;
     if (lensDirection == CameraLensDirection.front) {
-      newDescription = _availableCameras!.firstWhere((description) =>
-          description.lensDirection == CameraLensDirection.back);
+      newDescription = _availableCameras!.firstWhere(
+        (description) => description.lensDirection == CameraLensDirection.back,
+      );
     } else {
-      newDescription = _availableCameras!.firstWhere((description) =>
-          description.lensDirection == CameraLensDirection.front);
+      newDescription = _availableCameras!.firstWhere(
+        (description) => description.lensDirection == CameraLensDirection.front,
+      );
     }
     _initCamera(newDescription);
   }
@@ -69,6 +69,7 @@ class _AttendancePageState extends State<AttendancePage> {
         body: Center(child: CircularProgressIndicator()),
       );
     }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -94,7 +95,7 @@ class _AttendancePageState extends State<AttendancePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Absensi Datang',
+                            'Absensi Pulang',
                             style: TextStyle(
                               color: AppColors.white,
                               fontWeight: FontWeight.w700,
@@ -117,7 +118,7 @@ class _AttendancePageState extends State<AttendancePage> {
                     ],
                   ),
                 ),
-                const SpaceHeight(80.0),
+                const SizedBox(height: 80.0),
                 Row(
                   children: [
                     IconButton(
@@ -134,7 +135,7 @@ class _AttendancePageState extends State<AttendancePage> {
                       color: AppColors.red,
                     ),
                     const Spacer(),
-                    const SpaceWidth(48.0)
+                    const SizedBox(width: 48.0),
                   ],
                 ),
               ],

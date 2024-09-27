@@ -1,7 +1,12 @@
+import 'package:Viva/services/api.dart';
 import 'package:flutter/material.dart';
-// Ensure this import is correct
-import 'package:Viva/navigation.dart'; // Ensure this import is correct
+import 'package:Viva/navigation_hr.dart';
+import 'package:Viva/navigation_spg.dart'; // Ensure this import is correct
+import 'package:Viva/navigation_superadmin.dart'; // Ensure this import is correct
 import 'package:Viva/screens/forgot_password.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -13,6 +18,61 @@ class _SignInState extends State<SignIn> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool _obscureText = true; // Added for password visibility toggle
+  String? _errorMessage;
+
+  Future<void> login() async {
+    if (_formKey.currentState!.validate()) {
+      final response = await http.post(
+        Uri.parse(GetData().loginUrl),
+       
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': emailController.text,
+          'password': passwordController.text,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        String token = data['access_token'];
+        String id = data['id'].toString();
+        String role = data['role'];
+
+        // Simpan token menggunakan SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+        await prefs.setString('id', id);
+        await prefs.setString('role', role);
+        
+        
+
+        // Redirect ke halaman berdasarkan peran pengguna
+         if (role == 'user') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const NavigationSpg()),
+      );
+    } else if (role == 'admin') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const NavigationMenu()),
+      );
+    } else if (role == 'superadmin') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const NavigationSuperAdmin()),
+      );
+    } else {
+      // Jika peran tidak dikenali, kembali ke halaman login
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => SignIn()),
+      );
+    }
+      } else {
+        // Tangani error, misalnya tampilkan pesan error
+        setState(() {
+          _errorMessage = json.decode(response.body)['message'];
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +106,7 @@ class _SignInState extends State<SignIn> {
               child: Opacity(
                 opacity: 0.50,
                 child: Text(
-                  'Sign up now Viva Cosmetics Attendance',
+                  'Sign up now for Viva Cosmetics Attendance',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFF111827),
@@ -59,6 +119,11 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             SizedBox(height: 20), // Spacing
+            if (_errorMessage != null)
+              Text(
+                _errorMessage!,
+                style: const TextStyle(color: Colors.red),
+              ),
             Form(
               key: _formKey,
               child: Column(
@@ -138,13 +203,13 @@ class _SignInState extends State<SignIn> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ForgotPasswordPage(),
-                    ),
-                  );
-                },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordPage(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'Forget Password?',
                         style: TextStyle(
@@ -158,12 +223,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => NavigationMenu()), // Navigate to NavigationMenu
-                      );
-                    },
+                    onPressed: login,
                     child: Text(
                       'Sign In',
                       style: TextStyle(color: Colors.white),
@@ -173,9 +233,7 @@ class _SignInState extends State<SignIn> {
                       minimumSize: Size(double.infinity, 50), // Button size
                     ),
                   ),
-               
                   SizedBox(height: 20),
-                
                 ],
               ),
             ),
